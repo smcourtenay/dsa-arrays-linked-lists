@@ -98,15 +98,82 @@ class LinkedList {
 
   /** getAt(idx): get val at idx. */
 
-  getAt(idx) {}
+  getAt(idx) {
+
+    if (idx > this.length) throw "Error: Invalid index."
+
+    let current = this.head;
+
+    let counter = 0;
+
+    while (counter < idx){
+      current = current.next;
+      counter++;
+    }
+
+    return current.val
+  }
 
   /** setAt(idx, val): set val at idx to val */
 
-  setAt(idx, val) {}
+  setAt(idx, val) {
+
+    if (idx > this.length) throw "Error: Invalid index."
+
+    let current = this.head;
+
+    let counter = 0;
+
+    while (counter < idx){
+      current = current.next;
+      counter++;
+    }
+
+    current.val = val;
+  }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
-  insertAt(idx, val) {}
+  insertAt(idx, val) {
+    if (idx > this.length) throw "Error: Invalid index."
+
+    const newNode = new Node(val)
+
+    if (this.length === 0){
+      this.head = newNode;
+      this.tail = newNode;
+      this.length++;
+      return undefined;
+    }
+
+    if (idx === 0){
+      newNode.next = this.head
+      this.head = newNode;
+      this.length++;
+      return undefined;
+    }
+
+    let current = this.head;
+
+    let counter = 0;
+
+    // Stop one position before index
+    while (counter < idx - 1){
+      current = current.next;
+      counter++;
+    }
+
+    const nextNode = current.next; // 15
+
+    current.next = newNode; // 12
+
+    newNode.next = nextNode; // 15
+
+    this.length++;
+    return undefined;
+  }
+
+  // [5, 10, 12, 15, 20]
 
   /** removeAt(idx): return & remove item at idx, */
 
