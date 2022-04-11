@@ -89,42 +89,39 @@ class LinkedList {
       this.length = 0;
       return removeVal;
     }
-    
+
     this.head = this.head.next;
     this.length--;
     return removeVal;
-
   }
 
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
-
-    if (idx > this.length) throw "Error: Invalid index."
+    if (idx > this.length) throw "Error: Invalid index.";
 
     let current = this.head;
 
     let counter = 0;
 
-    while (counter < idx){
+    while (counter < idx) {
       current = current.next;
       counter++;
     }
 
-    return current.val
+    return current.val;
   }
 
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
-
-    if (idx > this.length) throw "Error: Invalid index."
+    if (idx > this.length) throw "Error: Invalid index.";
 
     let current = this.head;
 
     let counter = 0;
 
-    while (counter < idx){
+    while (counter < idx) {
       current = current.next;
       counter++;
     }
@@ -135,19 +132,19 @@ class LinkedList {
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
-    if (idx > this.length) throw "Error: Invalid index."
+    if (idx > this.length) throw "Error: Invalid index.";
 
-    const newNode = new Node(val)
+    const newNode = new Node(val);
 
-    if (this.length === 0){
+    if (this.length === 0) {
       this.head = newNode;
       this.tail = newNode;
       this.length++;
       return undefined;
     }
 
-    if (idx === 0){
-      newNode.next = this.head
+    if (idx === 0) {
+      newNode.next = this.head;
       this.head = newNode;
       this.length++;
       return undefined;
@@ -158,26 +155,48 @@ class LinkedList {
     let counter = 0;
 
     // Stop one position before index
-    while (counter < idx - 1){
+    while (counter < idx - 1) {
       current = current.next;
       counter++;
     }
 
-    const nextNode = current.next; // 15
+    const nextNode = current.next;
 
-    current.next = newNode; // 12
+    current.next = newNode;
 
-    newNode.next = nextNode; // 15
+    newNode.next = nextNode;
 
+    if (idx === this.length) {
+      this.tail = newNode;
+    }
     this.length++;
+
     return undefined;
   }
 
-  // [5, 10, 12, 15, 20]
-
   /** removeAt(idx): return & remove item at idx, */
 
-  removeAt(idx) {}
+  removeAt(idx) {
+    if (idx > this.length || this.length === 0) throw "Error: Invalid index.";
+
+    const newNode = new Node(val);
+    let current = this.head;
+    let counter = 0;
+
+
+    while (counter < idx - 1) {
+      current = current.next;
+      counter++;
+    }
+    if(current.next.next !== null){
+      current.next = current.next.next;
+    } else if(current.next.next === null){
+      current.next = null;
+    }
+    
+
+
+  }
 
   /** average(): return an average of all values in the list */
 
