@@ -179,28 +179,58 @@ class LinkedList {
   removeAt(idx) {
     if (idx > this.length || this.length === 0) throw "Error: Invalid index.";
 
-    const newNode = new Node(val);
     let current = this.head;
     let counter = 0;
 
+    if (this.length === 1) {
+      const removedValue = current.val;
+      this.head = null;
+      this.tail = null;
+      this.length--;
+      return removedValue;
+    }
 
-    while (counter < idx - 1) {
+    while (counter < idx - 1) { // Node before desired index
       current = current.next;
       counter++;
     }
-    if(current.next.next !== null){
-      current.next = current.next.next;
-    } else if(current.next.next === null){
-      current.next = null;
-    }
     
+    const removedValue = current.next.val;
+    
+    // If target Node is tail
+    if (current.next.next === null){
+      this.tail = current;
+      current.next = null;
+      this.length--;
+      return removedValue;
+    }
 
+    current.next = current.next.next;
 
+    this.length--;
+    return removedValue;
+    
   }
 
   /** average(): return an average of all values in the list */
 
-  average() {}
+  average() {
+
+    if (this.length === 0) return 0;
+
+    let sum = 0;
+
+    let current = this.head;
+    let counter = 0;
+
+    while (counter < this.length) { 
+      sum += current.val
+      current = current.next;
+      counter++;
+    }
+
+    return sum/this.length;
+  }
 }
 
 module.exports = LinkedList;
